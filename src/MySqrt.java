@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 /**
  * Created by oskar on 23/01/2016.
  */
@@ -36,7 +38,7 @@ public class MySqrt {
             }
             while(Math.abs(Math.pow(returnValue,2) - x) > epsilon);
         }
-        return Math.abs(returnValue);
+        return returnValue;
     }
 
     public static double mySqrtRecurse(double x, double epsilon){
@@ -48,6 +50,11 @@ public class MySqrt {
 
     public static void main(String[] args){
         System.out.println(mySqrtLoop(25, 0.000001));
+        System.out.println(mySqrtLoop(7, 0.000001));
+        System.out.println(mySqrtLoop(0.5, 0.000001));
+        System.out.println(mySqrtLoop(0, 0.000001));
+        System.out.println(mySqrtLoop(-4, 0.000001));
+
     }
 
 }
