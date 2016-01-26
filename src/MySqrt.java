@@ -40,11 +40,31 @@ public class MySqrt {
     }
 
     public static double mySqrtRecurse(double x, double epsilon){
-        if(x < 0){
-            return Double.NaN;
-        }
 
-        return 0;
+        return recursiveSqrt(0, x, x, epsilon);
+    }
+
+    private static double recursiveSqrt(double ymin, double ymax, double x, double epsilon) {
+
+        if (Math.pow(ymin, 2) < x || Math.pow(ymax, 2) > x)
+            recursiveSqrt(ymin, ymax/2, x, epsilon);
+
+
+        if(Math.pow(ymin, 2) < x || Math.pow(ymax, 2) < x)
+            recursiveSqrt(ymax, x, x, epsilon);
+
+
+        double difference =getDifference(ymin, ymax, x);
+        if(difference < epsilon);
+            return difference;
+
+    }
+
+    private static double getDifference(double ymin, double ymax, double x) {
+        double mean = (ymax+ymin)/2;
+        double meanSquared = Math.pow(mean, 2);
+        double difference = meanSquared - x;
+        return difference;
     }
 
     public static void main(String[] args){
