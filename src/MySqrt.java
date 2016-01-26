@@ -1,5 +1,3 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 /**
  * Created by oskar on 23/01/2016.
  */
@@ -50,7 +48,7 @@ public class MySqrt {
 
     public static double mySqrtRecurse(double x, double epsilon){
 		if (x<0)
-			return Double.NAN;
+			return Double.NaN;
 		else if (x == 0)
 			return x;
         return recursiveSqrt(0, x, x, epsilon);
