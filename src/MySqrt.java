@@ -7,8 +7,11 @@ public class MySqrt {
     public static double mySqrtLoop(double x, double epsilon){
         double upper, lower;
         double returnValue = Double.NaN;
+        if(x == 0 || x == 1){
+            returnValue = x;
+        }
         //If x is non-negative and less than one, the original interval is set to [x,1].
-        if(x >= 0 && x <= 1){
+        else if(x > 0 && x < 1){
             upper = 1;
             lower = x;
             //Loops until the return value is correct with a fault tolerance of epsilon.
@@ -90,7 +93,7 @@ public class MySqrt {
         System.out.println(mySqrtLoop(25, 0.000001)); //Should return approximately 5
         System.out.println(mySqrtLoop(7, 0.000001));  //Should return approximately 2.64575
         System.out.println(mySqrtLoop(0.5, 0.000001));//Should return approximately 0.70710
-        System.out.println(mySqrtLoop(0, 0.000001));  //Should return approximately 0
+        System.out.println(mySqrtLoop(0, 0.000001));  //Should return 0
         System.out.println(mySqrtLoop(-4, 0.000001)); //Should return NaN
 		
 		
