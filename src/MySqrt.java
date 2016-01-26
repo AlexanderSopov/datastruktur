@@ -20,7 +20,7 @@ public class MySqrt {
                 }
                 returnValue = (upper+lower)/2;
             }
-            while(Math.abs(returnValue) - x < epsilon);
+            while(Math.abs(Math.pow(returnValue,2) - x) > epsilon);
         }
         else if(x > 1){
             upper = x;
@@ -34,21 +34,20 @@ public class MySqrt {
                 }
                 returnValue = (upper+lower)/2;
             }
-            while(Math.abs(returnValue) - x < epsilon);
+            while(Math.abs(Math.pow(returnValue,2) - x) > epsilon);
         }
         return Math.abs(returnValue);
     }
 
     public static double mySqrtRecurse(double x, double epsilon){
-        if(x < 0){
-            return Double.NaN;
-        }
+        double upper, lower;
+        double returnValue = Double.NaN;
 
-        return 0;
+        return returnValue;
     }
 
     public static void main(String[] args){
-        System.out.println(mySqrtLoop(5, 0.000001));
+        System.out.println(mySqrtLoop(25, 0.000001));
     }
 
 }
