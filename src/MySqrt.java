@@ -20,7 +20,7 @@ public class MySqrt {
                 }
                 returnValue = (upper+lower)/2;
             }
-            while(Math.abs(returnValue) - x < epsilon);
+            while(Math.abs(Math.pow(returnValue,2) - x) > epsilon);
         }
         else if(x > 1){
             upper = x;
@@ -34,7 +34,7 @@ public class MySqrt {
                 }
                 returnValue = (upper+lower)/2;
             }
-            while(Math.abs(returnValue) - x < epsilon);
+            while(Math.abs(Math.pow(returnValue,2) - x) > epsilon);
         }
         return Math.abs(returnValue);
     }
@@ -45,30 +45,33 @@ public class MySqrt {
     }
 
     private static double recursiveSqrt(double ymin, double ymax, double x, double epsilon) {
-
-        if (Math.pow(ymin, 2) < x || Math.pow(ymax, 2) > x)
-            recursiveSqrt(ymin, ymax/2, x, epsilon);
-
-
-        if(Math.pow(ymin, 2) < x || Math.pow(ymax, 2) < x)
-            recursiveSqrt(ymax, x, x, epsilon);
-
-
-        double difference =getDifference(ymin, ymax, x);
-        if(difference < epsilon);
-            return difference;
+		/*
+		System.out.println("Ymin = " + ymin + "\n" +
+							"Ymax = " + ymax);
+        */
+        
+       	double mean = (ymax+ymin)/2;
+        double meanSquared = Math.pow(mean, 2);
+		double difference = getDifference(meanSquared, x);
+		
+		if( difference < epsilon)
+            return mean;
+        
+        else if (meanSquared > x)
+            return recursiveSqrt(ymin, mean, x, epsilon);
+		
+		return recursiveSqrt(mean, ymax, x, epsilon);
 
     }
 
-    private static double getDifference(double ymin, double ymax, double x) {
-        double mean = (ymax+ymin)/2;
-        double meanSquared = Math.pow(mean, 2);
-        double difference = meanSquared - x;
+    
+    private static double getDifference(double mean, double x) {
+        double difference = Math.abs(mean - x);
         return difference;
     }
 
     public static void main(String[] args){
-        System.out.println(mySqrtLoop(5, 0.000001));
+        System.out.println(mySqrtRecurse(25, 0.000001));
     }
 
 }
