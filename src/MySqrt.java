@@ -52,6 +52,8 @@ public class MySqrt {
 
 
 
+
+
     public static double mySqrtRecurse(double x, double epsilon){
 		if (x<0)
 			return Double.NaN;
@@ -63,6 +65,9 @@ public class MySqrt {
 
         return recursiveSqrt(1, x, x, epsilon);
     }
+
+
+
 
     private static double recursiveSqrt(double ymin, double ymax, double x, double epsilon) {
 		/*
@@ -76,12 +81,13 @@ public class MySqrt {
 		if( getDelta(meanSquared, x) < epsilon) //Is delta smaller than epsilon? If so we're done
             return mean;
         
-        else if (meanSquared > x) 
+        if (meanSquared > x)
             return recursiveSqrt(ymin, mean, x, epsilon);
 		
 		return recursiveSqrt(mean, ymax, x, epsilon);
-
     }
+
+
 
 
     private static double getDelta(double mean, double x) {
