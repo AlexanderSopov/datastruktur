@@ -49,9 +49,15 @@ public class MySqrt {
     public static double mySqrtRecurse(double x, double epsilon){
 		if (x<0)
 			return Double.NaN;
-		else if (x == 0)
+		else if (x == 0 || x == 1)
 			return x;
-        return recursiveSqrt(0, x, x, epsilon);
+
+        if (0 < x && x < 1)
+            return recursiveSqrt(x, 1, x, epsilon);
+
+
+
+        return recursiveSqrt(1, x, x, epsilon);
     }
 
     private static double recursiveSqrt(double ymin, double ymax, double x, double epsilon) {
