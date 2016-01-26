@@ -61,8 +61,6 @@ public class MySqrt {
         if (0 < x && x < 1)
             return recursiveSqrt(x, 1, x, epsilon);
 
-
-
         return recursiveSqrt(1, x, x, epsilon);
     }
 
@@ -72,30 +70,26 @@ public class MySqrt {
 							"Ymax = " + ymax);
         */
         
-       	double mean = (ymax+ymin)/2;
+       	double mean = (ymax + ymin) / 2;
         double meanSquared = Math.pow(mean, 2);
-		double difference = getDifference(meanSquared, x);
 		
-		if( difference < epsilon)
+		if( getDelta(meanSquared, x) < epsilon) //Is delta smaller than epsilon? If so we're done
             return mean;
         
-        else if (meanSquared > x)
+        else if (meanSquared > x) 
             return recursiveSqrt(ymin, mean, x, epsilon);
 		
 		return recursiveSqrt(mean, ymax, x, epsilon);
 
     }
 
-    /**
-     * Calls
-     * @param mean
-     * @param x
-     * @return
-     */
-    private static double getDifference(double mean, double x) {
+
+    private static double getDelta(double mean, double x) {
         double difference = Math.abs(mean - x);
         return difference;
     }
+
+
 
     public static void main(String[] args){
         double[] numbers = {25, 7, 0.5, 0, -4};
@@ -103,17 +97,19 @@ public class MySqrt {
 
         test(numbers, results);
 
-
-
-
-
     }
 
     private static void test(double[] x, String[] returnValue){
+        //Test sqrLoop
         for (int i=0; i< x.length; i++)
             System.out.println(mySqrtLoop(x[i], 0.000001)+ ". Should return approximately " +
                     returnValue[i]);
 
+
+        System.out.println("\nRecursive Strategy:\n");
+
+
+        //Test sqrRecurse
         for (int i=0; i< x.length; i++)
             System.out.println(mySqrtRecurse(x[i], 0.000001)+ ". Should return approximately " +
                     returnValue[i]);
