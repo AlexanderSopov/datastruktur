@@ -1,5 +1,3 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 /**
  * Created by oskar on 23/01/2016.
  */
@@ -52,10 +50,37 @@ public class MySqrt {
     }
 
     public static double mySqrtRecurse(double x, double epsilon){
-        double upper, lower;
-        double returnValue = Double.NaN;
+		if (x<0)
+			return Double.NaN;
+		else if (x == 0)
+			return x;
+        return recursiveSqrt(0, x, x, epsilon);
+    }
 
-        return returnValue;
+    private static double recursiveSqrt(double ymin, double ymax, double x, double epsilon) {
+		/*
+		System.out.println("Ymin = " + ymin + "\n" +
+							"Ymax = " + ymax);
+        */
+        
+       	double mean = (ymax+ymin)/2;
+        double meanSquared = Math.pow(mean, 2);
+		double difference = getDifference(meanSquared, x);
+		
+		if( difference < epsilon)
+            return mean;
+        
+        else if (meanSquared > x)
+            return recursiveSqrt(ymin, mean, x, epsilon);
+		
+		return recursiveSqrt(mean, ymax, x, epsilon);
+
+    }
+
+    
+    private static double getDifference(double mean, double x) {
+        double difference = Math.abs(mean - x);
+        return difference;
     }
 
     public static void main(String[] args){
@@ -64,6 +89,14 @@ public class MySqrt {
         System.out.println(mySqrtLoop(0.5, 0.000001));//Should return approximately 0.70710
         System.out.println(mySqrtLoop(0, 0.000001));  //Should return 0
         System.out.println(mySqrtLoop(-4, 0.000001)); //Should return NaN
+		
+		
+		
+        System.out.println(mySqrtRecurse(25, 0.000001)); //Should return approximately 5
+        System.out.println(mySqrtRecurse(7, 0.000001));  //Should return approximately 2.64575
+        System.out.println(mySqrtRecurse(0.5, 0.000001));//Should return approximately 0.70710
+        System.out.println(mySqrtRecurse(0, 0.000001));  //Should return approximately 0
+        System.out.println(mySqrtRecurse(-4, 0.000001)); //Should return NaN
 
     }
 
