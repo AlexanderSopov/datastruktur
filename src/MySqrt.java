@@ -111,18 +111,24 @@ public class MySqrt {
 
     private static void test(double[] x, String[] returnValue){
         //Test sqrLoop
+
+        long currentTime = System.nanoTime();
         for (int i=0; i< x.length; i++)
             System.out.println(mySqrtLoop(x[i], 0.000001)+ ". Should return approximately " +
                     returnValue[i]);
 
-
+        long delta = System.nanoTime() - currentTime;
+        System.out.println("\nTime it took: " + delta + " nanosec.\n");
         System.out.println("\nRecursive Strategy:\n");
 
-
+        currentTime = System.nanoTime();
         //Test sqrRecurse
         for (int i=0; i< x.length; i++)
             System.out.println(mySqrtRecurse(x[i], 0.000001)+ ". Should return approximately " +
                     returnValue[i]);
+
+        delta = System.nanoTime() - currentTime;
+        System.out.println("\nTime it took: " + delta + " nanosec\n");
     }
 
 }
