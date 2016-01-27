@@ -49,6 +49,11 @@ public class MySqrt {
         return returnValue;
     }
 
+
+
+
+
+
     public static double mySqrtRecurse(double x, double epsilon){
 		if (x<0)
 			return Double.NaN;
@@ -58,10 +63,11 @@ public class MySqrt {
         if (0 < x && x < 1)
             return recursiveSqrt(x, 1, x, epsilon);
 
-
-
         return recursiveSqrt(1, x, x, epsilon);
     }
+
+
+
 
     private static double recursiveSqrt(double ymin, double ymax, double x, double epsilon) {
 		/*
@@ -69,41 +75,56 @@ public class MySqrt {
 							"Ymax = " + ymax);
         */
         
-       	double mean = (ymax+ymin)/2;
+       	double mean = (ymax + ymin) / 2;
         double meanSquared = Math.pow(mean, 2);
-		double difference = getDifference(meanSquared, x);
 		
-		if( difference < epsilon)
+		if( getDelta(meanSquared, x) < epsilon) //Is delta smaller than epsilon? If so we're done
             return mean;
         
-        else if (meanSquared > x)
+        if (meanSquared > x)
             return recursiveSqrt(ymin, mean, x, epsilon);
 		
 		return recursiveSqrt(mean, ymax, x, epsilon);
-
     }
 
-    
-    private static double getDifference(double mean, double x) {
+
+
+
+    private static double getDelta(double mean, double x) {
         double difference = Math.abs(mean - x);
         return difference;
     }
 
-    public static void main(String[] args){
-        System.out.println(mySqrtLoop(25, 0.000001)); //Should return approximately 5
-        System.out.println(mySqrtLoop(7, 0.000001));  //Should return approximately 2.64575
-        System.out.println(mySqrtLoop(0.5, 0.000001));//Should return approximately 0.70710
-        System.out.println(mySqrtLoop(0, 0.000001));  //Should return 0
-        System.out.println(mySqrtLoop(-4, 0.000001)); //Should return NaN
-		
-		
-		
-        System.out.println(mySqrtRecurse(25, 0.000001)); //Should return approximately 5
-        System.out.println(mySqrtRecurse(7, 0.000001));  //Should return approximately 2.64575
-        System.out.println(mySqrtRecurse(0.5, 0.000001));//Should return approximately 0.70710
-        System.out.println(mySqrtRecurse(0, 0.000001));  //Should return approximately 0
-        System.out.println(mySqrtRecurse(-4, 0.000001)); //Should return NaN
 
+
+    public static void main(String[] args){
+        double[] numbers = {25, 7, 0.5, 0, -4};
+        String[] results = {"5", "2.64575", "0.70710", "0", "NaN"};
+
+        test(numbers, results);
+
+    }
+
+    private static void test(double[] x, String[] returnValue){
+        //Test sqrLoop
+
+        long currentTime = System.nanoTime();
+        for (int i=0; i< x.length; i++)
+            System.out.println(mySqrtLoop(x[i], 0.000001)+ ". Should return approximately " +
+                    returnValue[i]);
+
+        long delta = System.nanoTime() - currentTime;
+        System.out.println("\nTime it took: " + delta + " nanosec.\n");
+        System.out.println("\nRecursive Strategy:\n");
+
+        currentTime = System.nanoTime();
+        //Test sqrRecurse
+        for (int i=0; i< x.length; i++)
+            System.out.println(mySqrtRecurse(x[i], 0.000001)+ ". Should return approximately " +
+                    returnValue[i]);
+
+        delta = System.nanoTime() - currentTime;
+        System.out.println("\nTime it took: " + delta + " nanosec\n");
     }
 
 }
