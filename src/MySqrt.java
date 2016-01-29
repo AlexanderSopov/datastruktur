@@ -55,14 +55,18 @@ public class MySqrt {
 
 
     public static double mySqrtRecurse(double x, double epsilon){
-		if (x<0)
-			return Double.NaN;
-		else if (x == 0 || x == 1)
-			return x;
 
+        // check for negative numbers
+        if (x<0)
+			return Double.NaN;
+        //Check for 0 and 1, which have quick and easy answers
+		if (x == 0 || x == 1)
+			return x;
+        // check for x between 0 and 1
         if (0 < x && x < 1)
             return recursiveSqrt(x, 1, x, epsilon);
 
+        // no special case? alright, recourse
         return recursiveSqrt(1, x, x, epsilon);
     }
 
