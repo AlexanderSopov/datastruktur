@@ -110,7 +110,7 @@ public class MaxSumTest {
         // it takes very long to run slow algorithms at big arrays
         // so the slow algorithms are not run above these limits
         // make them as large as possible but balance with size of nbrOfTests
-        int limit1 = 300;
+        int limit1 = 2048;
         int limit2 = 2048;
         // end of things to change
 
@@ -131,7 +131,7 @@ public class MaxSumTest {
         // headline
         System.out.println(">>>Time is seconds per " + nbrOfTests + " calls to MaxSubSum");
         System.out.print("Size of Array ->");
-        for( int arraySize = 64; arraySize <= maxSizeOfArray; arraySize *= 1.25 ) {
+        for( int arraySize = 64; arraySize <= maxSizeOfArray; arraySize *= 2 ) {
             System.out.printf("%11s", arraySize);
 
         }
@@ -139,7 +139,7 @@ public class MaxSumTest {
         // end headline
         for( int alg = 1; alg <=3; alg++ ) {
             System.out.print("algo  #" + alg +"        ");
-            for( int arraySize = 50; arraySize <= maxSizeOfArray; arraySize *= 1.25 ) {
+            for( int arraySize = 50; arraySize <= maxSizeOfArray; arraySize *= 2 ) {
                 // double the size every time
                 // eventually skip this array size, too slow
                 if( (alg == 1 && arraySize > limit1) ||  (alg == 2 && arraySize > limit2)) {
