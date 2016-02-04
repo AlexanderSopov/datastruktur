@@ -1,5 +1,5 @@
 /**
- * Created by oskar and Alexander Sopov on 23/01/2016.
+ * Created by Oskar Willman and Alexander Sopov on 23/01/2016.
  */
 
 public class MySqrt {
