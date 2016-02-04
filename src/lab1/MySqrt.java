@@ -1,3 +1,5 @@
+package lab1;
+
 /**
  * Created by Oskar Willman and Alexander Sopov on 23/01/2016.
  */

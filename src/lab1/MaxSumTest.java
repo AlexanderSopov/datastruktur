@@ -1,3 +1,5 @@
+package lab1;
+
 import java.util.Random;
 // For things that can be changed see main
 /*
@@ -104,7 +106,7 @@ public class MaxSumTest {
         // things that can be changed
         // tests are done with arrays of size 64, 128, 256, ..., maxSizeOfArray
         int maxSizeOfArray = 5000;  // make as large as possible
-        // nbr of times that MaxSum.maxSubSumx is called
+        // nbr of times that lab1.MaxSum.maxSubSumx is called
         // (one call is so fast that you don't get reliable information)
         int nbrOfTests = 2000; // experiment, minimum 2000
         // it takes very long to run slow algorithms at big arrays
