@@ -53,7 +53,7 @@ public class Lab2b {
 
 		@Override
 		public int compareTo(Object o){
-			int v = (int) ( (d - ((Vector)o).d) *100);
+			int v = (int) ( (d - ((Vector)o).d) *10000);
 			calculateDelta();
 			return v;
 		}
