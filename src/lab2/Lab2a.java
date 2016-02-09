@@ -1,3 +1,4 @@
+package lab2;
 public class Lab2a {
   public static double[] simplifyShape(double[] poly, int k){
 	
@@ -12,7 +13,6 @@ public class Lab2a {
     // escape recursion
     if (poly.length == k*2)
       return poly;
-    
     
     int index = 0;
     double smallest = 100;
