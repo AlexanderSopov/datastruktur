@@ -75,19 +75,23 @@ public class DLList<E> {
     */
   public Node insertAfter(E e, Node after) {
       Node newNode;
+
       if(after != null) {
           newNode = new Node(e);
           newNode.next = after.next;
           newNode.prev = after;
+          if (after != last)
+              after.next.prev = newNode;
           after.next = newNode;
-      }else {
+      }else if (size == 0)
           newNode = new Node(e);
+      else{
+          newNode = new Node(e);
+          first.next = newNode;
+          newNode.prev = first;
       }
       if (after == last)
           last = newNode;
-
-      System.out.println("Insert after:\nFirst = " +
-              print(first) + "\nLast = " + print(last) +"\n\n");
 
 
       size++;
@@ -105,41 +109,39 @@ public class DLList<E> {
           newNode = new Node(e);
           newNode.prev = before.prev;
           newNode.next = before;
+          if (before != first)
+              before.prev.next = newNode;
           before.prev = newNode;
+      }else if (size == 0){
+          newNode = new Node(e);
+      }else {
+          newNode = new Node(e);
+          newNode.next = last;
+          first = newNode;
       }
-      else
-        newNode = new Node(e);
-
       if (before == first)
           first = newNode;
       size++;
 
 
-      System.out.println("Insert before:\nFirst = " +
-              print(first) + "\nLast = " + print(last) + "\n\n");
-
-
       return newNode;
   }
 
-    private String print(Node last) {
-        if (last == null)
-            return "Null";
-        else
-            return last.toString();
-    }
 
     /** removes an element
     * @param l   then node containing the element that will be removed, must be non-null and a node belonging to this list
     */
   public void remove(Node l) {
-  	if (l.elt != null && l.next != null ){
-      Node before = l.prev;
-      Node after = l.next;
-      before.next = after;
-      after.prev = before;
-      size--;
-    }
-    
+      if(l == last) {
+          l.prev.next = null;
+          last = l.prev;
+      }else if (l == first ) {
+          l.next.prev = null;
+          first = l.next;
+      }else {
+          l.next.prev = l.prev;
+          l.prev.next = l.next;
+      }
   }
+
 }

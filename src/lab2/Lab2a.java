@@ -58,7 +58,7 @@ public class Lab2a {
     double l3 = calculateDistance (poly[i-2], poly[i-1],poly[i+2], poly[i+3] );
 
     //System.out.println("Distance = " + (l1+l2-l3) + "\n");
-        return l1+l2-l3;
+        return (l1+l2-l3)*100;
   }
 
   private static double calculateDistance(double x1, double y1, double x2, double y2) {

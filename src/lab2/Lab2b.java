@@ -47,13 +47,15 @@ public class Lab2b {
 				double l2 = getDist(v2);
 				double l3 = v1.getDist(v2);
 				d= l1 + l2 - l3;
-			}
-			d = 100;
+			}else
+				d = 100;
 		}
 
 		@Override
 		public int compareTo(Object o){
-			return (int) (d - ((Vector)o).d)*100;
+			int v = (int) ( (d - ((Vector)o).d) *100);
+			calculateDelta();
+			return v;
 		}
 	
 	}	
@@ -68,22 +70,32 @@ public class Lab2b {
 		int pointsToRemove = (poly.length / 2) - k;
 		// Populate list of Vectors (points in graph)
 		listOfPoints.addFirst(new Vector(poly[0], poly[1]));
-
-
 		DLList.Node node = listOfPoints.first;
 		((Vector) node.elt).setNode(node);
 
-
-		for (int i = 0; i<poly.length;i+=2)
+		for (int i = 2; i<poly.length;i+=2)
 			populateList(poly[i], poly[i + 1]);
+
 
 		((Vector)listOfPoints.last.elt).calculateDelta();
 		q.add(((Vector) listOfPoints.last.elt));
 
 
+		//Testicles
+		DLList.Node testn = listOfPoints.first;
+		while (testn != null) {
+			System.out.println(((Vector) testn.elt).d);
+			testn = testn.next;
+		}
+
+
 
 		for (int i = 0; i<pointsToRemove; i++)
 			delete(((Vector)(q.remove())).node);
+
+
+
+
 
 		double[] array = new double[poly.length-(pointsToRemove*2)];
 		DLList.Node curNode = listOfPoints.first;
@@ -108,11 +120,19 @@ public class Lab2b {
 
 
 	private static void delete(DLList.Node n){
+		Vector v = ((Vector)n.elt);
+		System.out.println("Deleting point: (" + v.x + ", " + v.y + "), d = " + (int)(v.d*100));
+
 		DLList.Node prev = n.prev;
 		DLList.Node next = n.next;
+
 		listOfPoints.remove(n);
+
+		q.remove((Vector) prev.elt);
 		((Vector)prev.elt).calculateDelta();
 		q.add((Vector) prev.elt);
+
+		q.remove((Vector) next.elt);
 		((Vector)next.elt).calculateDelta();
 		q.add((Vector)next.elt);
 	}
