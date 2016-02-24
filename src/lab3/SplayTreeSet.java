@@ -53,7 +53,16 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
             }
             else if(value.compareTo(node.left.value) > 0){
                 node.left.right = splay(node.left.right, value);
+                if(node.left.right != null){
+                    node.left = rotateLeft(node.left);
+                }
             }
+            if(node.left == null) return node;
+            else                  return rotateLeft(node);
+        }
+        else if(value.compareTo(node.value) > 0){
+            if(node.right == null) return node;
+            
         }
 
         return node;
