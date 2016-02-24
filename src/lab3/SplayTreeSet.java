@@ -37,7 +37,6 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
         //splay(root, x);
 
         if(this.contains(x)) {
-            System.out.println("\n ADD METHOD RETURNING FALSE");
             return false;
         }
         else{
@@ -54,9 +53,6 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
                 root = newNode;
             }
         }
-        /*System.out.println("\n BEFORE SPLAY: Root value = " + root.value + "    x = " + x);
-        root = splay(root, x);>*/
-        System.out.println("\n AFTER SPLAY: Root value = " + root.value + "    x = " + x);
         size++;
         return true;
     }
@@ -64,7 +60,6 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
     public boolean remove(E x){
 
         if(!this.contains(x)){
-            System.out.println("\n REMOVE METHOD RETURNING FALSE");
             return false;
         }
 
@@ -75,9 +70,6 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
         else if(root.right == null){
             root = root.left;
-            /*System.out.println("\n BEFORE SPLAY: Root value = " + root.value + "    x = " + x);
-            splay(root, x);
-            System.out.println("\n AFTER SPLAY: Root value = " + root.value + "    x = " + x);*/
         }
         else if(root.left == null) {
             root = root.right;
