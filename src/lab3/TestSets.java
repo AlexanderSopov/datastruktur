@@ -62,5 +62,12 @@ public class TestSets {
             System.out.print("[" + element + "]= " + nextInt + ", ");
             element++;
         }//*/
+
+        /*
+        for(Object inT : set){
+            Integer nextInt = (Integer) inT;
+            System.out.print("[" + element + "]= " + nextInt + ", ");
+            element++;
+        }//*/
     }
 }
