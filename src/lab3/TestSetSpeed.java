@@ -1,5 +1,7 @@
 package lab3;
 
+import lab3.SplayTreeSet;
+
 import java.util.Random;
 
 class TestSetSpeed {

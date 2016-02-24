@@ -56,7 +56,7 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
             }
         }
 
-
+        return node;
     }
 
     private SplayNode rotateRight(SplayNode node){
