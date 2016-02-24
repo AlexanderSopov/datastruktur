@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Created by Alex on 16-02-23.
+ * Created by Alex and Oscar on 16-02-23.
  */
 public class SortedLinkedListSet<E extends Comparable<? super E>> implements SimpleSet,
         Iterable<E>{
@@ -60,11 +60,11 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
     @Override
     public boolean add(Comparable x) {
         if (smallest == null){
-            System.out.println("adding smallest, x = " + x);
+            //System.out.println("adding smallest, x = " + x);
             smallest = new Node(x);
             return true;
         }else if (x.compareTo(smallest.elt) < 0 ){
-            System.out.println("inserting before smallest, x = " + x);
+            //System.out.println("inserting before smallest, x = " + x);
             smallest = insertBefore((E)x, smallest);
             //size++;
             return true;
