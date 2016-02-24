@@ -1,5 +1,6 @@
 package lab3;
 
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -32,7 +33,6 @@ public class TestSets {
 
         System.out.println("\nprinting after remove");
         print(eraseInt);//*/
-
 /*
         set.add(1);
         set.add(1);
@@ -53,18 +53,14 @@ public class TestSets {
         for(int i=0; i<arr.length; i++)
             System.out.print("[" + i + "]=>>  " + arr[i] + ",  ");
 
-        SortedLinkedListSet.Node curNode = set.smallest;
-
         int element = 0;
         System.out.println("\n\nlinkedList size = " + set.size());
 
-        while(curNode != null){
-            System.out.print("[" + element + "]= " + curNode.elt + ", ");
+        Iterator<Integer> iter = set.iterator();
+        while(iter.hasNext()){
+            int nextInt = iter.next();
+            System.out.print("[" + element + "]= " + nextInt + ", ");
             element++;
-            curNode = curNode.getNext();
-        }
-
+        }//*/
     }
-
-
 }
