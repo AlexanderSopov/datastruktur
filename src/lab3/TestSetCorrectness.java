@@ -1,7 +1,5 @@
 package lab3;
 
-import java.util.Iterator;
-import java.util.Set;
 import java.util.Random;
 import java.util.TreeSet;
 
@@ -79,7 +77,7 @@ public class TestSetCorrectness {
     public static void main(String[] args) {
 
         try {
-            testSet(2, 10000, 100, 20);
+            testSet(1, 10000, 100, 20);
         } catch (MyException e) {
             System.out.println(e.getMessage());
         }
