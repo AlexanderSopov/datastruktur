@@ -1,26 +1,76 @@
 package lab3;
 
 /**
- * Created by Alex on 16-02-23.
+ * Created by oskar on 2016-02-17.
  */
-public class SplayTreeSet<Comparable> implements SimpleSet {
-    @Override
-    public int size() {
-        return 0;
+public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<E> {
+
+    private int size;
+    private SplayNode root;
+
+    private class SplayNode{
+        private E value;
+        private SplayNode left, right;
+
+        public SplayNode(E value){
+            this.value = value;
+        }
     }
 
-    @Override
-    public boolean add(java.lang.Comparable x) {
+
+    public SplayTreeSet(){
+        size = 0;
+    }
+
+
+    public int size(){
+        return size;
+    }
+
+    public boolean add(E x){
+        size++;
         return false;
     }
 
-    @Override
-    public boolean remove(java.lang.Comparable x) {
+    public boolean remove(E x){
+
+        size--;
         return false;
     }
 
-    @Override
-    public boolean contains(java.lang.Comparable x) {
+    public boolean contains(E x){
         return false;
     }
+
+    private SplayNode splay(SplayNode node, E value){
+        if(node == null) return null;
+
+        if(value.compareTo(node.value) < 0){
+            if(node.left == null) return node;
+            if(value.compareTo(node.left.value) < 0){
+                node.left.left = splay(node.left.left, value);
+                node = rotateRight(node);
+            }
+            else if(value.compareTo(node.left.value) > 0){
+                node.left.right = splay(node.left.right, value);
+            }
+        }
+
+        return node;
+    }
+
+    private SplayNode rotateRight(SplayNode node){
+        SplayNode newNode = node.left;
+        node.left = newNode.right;
+        newNode.right = node;
+        return newNode;
+    }
+
+    private SplayNode rotateLeft(SplayNode node){
+        SplayNode newNode = node.right;
+        node.right = newNode.left;
+        newNode.left = node;
+        return newNode;
+    }
+
 }
