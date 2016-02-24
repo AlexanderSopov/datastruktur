@@ -15,7 +15,7 @@ public class Lab2a {
       return poly;
     
     int index = 0;
-    double smallest = 100;
+    double smallest = 1000000;
 
     for (int i = 2; i<poly.length-2; i+=2) {
       double dist = calculateValue(poly, i);
