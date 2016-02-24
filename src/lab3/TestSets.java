@@ -10,7 +10,7 @@ public class TestSets {
     static SimpleSet set;
 
     public static void main(String[] args){
-        set = new SplayTreeSet<Integer>();
+        set = new SortedLinkedListSet<>();
         Random rand = new Random();
         int[] testElts = new int[20];
 
@@ -56,7 +56,7 @@ public class TestSets {
         int element = 0;
         System.out.println("\n\nlinkedList size = " + set.size());
 
-        Iterator<Integer> iter = ((SplayTreeSet)set).iterator();
+        Iterator<Integer> iter = ((SortedLinkedListSet)set).iterator();
         while(iter.hasNext()){
             int nextInt = iter.next();
             System.out.print("[" + element + "]= " + nextInt + ", ");

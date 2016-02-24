@@ -84,7 +84,9 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
 
 
     @Override
-    public boolean remove(java.lang.Comparable x) {
+    public boolean remove(Comparable x) {
+        if (smallest == null)
+            return false;
         if (x.compareTo(smallest.elt)==0) {
             smallest = smallest.getNext();
             size--;
@@ -107,9 +109,13 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
     }
 
     @Override
-    public boolean contains(java.lang.Comparable x) {
+    public boolean contains(Comparable x) {
+        if (smallest == null)
+            return false;
         if (x.compareTo(smallest.elt)==0)
             return true;
+        if(smallest.getNext() == null)
+            return false;
         Node currentNode = smallest.getNext();
         while (currentNode != null){
             if (x.compareTo(currentNode.elt) == 0)
