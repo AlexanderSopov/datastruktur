@@ -1,7 +1,5 @@
 package lab3;
 
-import lab3.SplayTreeSet;
-
 import java.util.Random;
 
 class TestSetSpeed {
@@ -32,7 +30,9 @@ class TestSetSpeed {
         long endTime = startTime;
 
         while (endTime - startTime <= 10000) {
+
             for (long i = 0; i < niter; i++) {
+
                 set.contains(new Integer(rand.nextInt(bound)));
                 set.contains(new Integer(rand.nextInt(bound)));
                 ops += 2;
@@ -48,6 +48,7 @@ class TestSetSpeed {
                     done = set.remove(new Integer(rand.nextInt(bound)));
                     ops++;
                 }
+
             }
 
             endTime = System.currentTimeMillis();

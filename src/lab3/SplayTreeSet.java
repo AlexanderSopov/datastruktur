@@ -58,12 +58,8 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
     }
 
     public boolean remove(E x){
-
-        if(!this.contains(x)){
-            return false;
-        }
-
-        System.out.println(root.value +" == "+ x);
+        root = splay(root, x);
+        if(root.value.compareTo(x) != 0) return false;
 
         if(root.right == null && root.left == null)
             root = null;
