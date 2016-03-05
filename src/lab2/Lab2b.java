@@ -81,7 +81,6 @@ public class Lab2b {
 		q.add(((Vector) listOfPoints.last.elt));
 
 
-		//Testicles
 		DLList.Node testn = listOfPoints.first;
 		while (testn != null) {
 			System.out.println(((Vector) testn.elt).d);

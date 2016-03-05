@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 /**
  * Created by Alex and Oscar on 16-02-23.
  */
-public class SortedLinkedListSet<E extends Comparable<? super E>> implements SimpleSet,
+public class SortedLinkedListSet<E extends Comparable<? super E>> implements SimpleSet<E>,
         Iterable<E>{
     public int size;
     public Node<E> smallest;

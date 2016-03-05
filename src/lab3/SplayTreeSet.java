@@ -58,6 +58,9 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
     }
 
     public boolean remove(E x){
+
+        if(root == null) return false;
+
         root = splay(root, x);
         if(root.value.compareTo(x) != 0) return false;
 
@@ -84,7 +87,7 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
         if(root == null) return false;
         root = splay(root, x);
-        return(root.value == x);
+        return(root.value.compareTo(x) == 0);
     }
 
     private SplayNode splay(SplayNode node, E value){
