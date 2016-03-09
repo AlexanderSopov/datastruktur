@@ -1,3 +1,6 @@
+package lab4.src;
+
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;

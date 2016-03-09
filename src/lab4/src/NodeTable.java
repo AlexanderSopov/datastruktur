@@ -1,3 +1,5 @@
+package lab4.src;
+
 import java.util.*;
 import java.text.Collator;
 /*
