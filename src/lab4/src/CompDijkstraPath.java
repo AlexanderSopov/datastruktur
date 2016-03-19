@@ -1,9 +1,8 @@
-package lab4.src;
 
 
 import java.util.Comparator;
 
-public class CompDijkstraPath implements Comparator<DijkstraElement> {
+public class CompDijkstraPath<E extends Edge> implements Comparator<DijkstraElement> {
 
     public int compare(DijkstraElement a, DijkstraElement b){
         if(a == b){

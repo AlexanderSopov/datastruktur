@@ -1,4 +1,3 @@
-package lab4.src;
 
 /**
 * A node object is used in the NodeTable class to map between 

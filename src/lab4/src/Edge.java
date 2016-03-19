@@ -1,4 +1,3 @@
-package lab4.src;
 
 /**
 * A minimal object for edges in a directed graph (here of type DirectedGraph).

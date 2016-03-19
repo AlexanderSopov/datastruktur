@@ -1,108 +1,84 @@
-package lab4.src;
+
 
 import java.util.*;
 
 public class DirectedGraph<E extends Edge> {
 
-    //private List<E> edgeList;
-    private ArrayList<ArrayList<E>> edgeList;
-    private int noOfNodes;
+
+    private List<E>[] edges;
+    private int nrOfNodes;
 
     public DirectedGraph(int noOfNodes) {
-        edgeList = new ArrayList<>();
-        for(int i = 0; i < noOfNodes; i++){
-            edgeList.add(new ArrayList<>());
-        }
-        //edgeList = new ArrayList<>();
-        this.noOfNodes = noOfNodes;
+        nrOfNodes = noOfNodes;
+        edges = new List[nrOfNodes];
+        for (int i = 0; i < nrOfNodes; i++)
+            edges[i] = new LinkedList<>();
     }
 
     public void addEdge(E e) {
-        //edgeList.add(e);
-        edgeList.get(e.getSource()).add(e);
+        edges[e.getSource()].add(e);
     }
 
     public Iterator<E> shortestPath(int from, int to) {
 
-        ArrayList<Integer> knownNodes = new ArrayList<>();
-        PriorityQueue<DijkstraElement<E>> pq = new PriorityQueue<>(new CompDijkstraPath ());
-        LinkedList<E> path = new LinkedList<>();
-        DijkstraElement<E> ele = new DijkstraElement<>(from, 0.0, path);
-        pq.add(ele);
-        while(!pq.isEmpty()){
+        ArrayList<Integer> visitedNodes = new ArrayList<>(nrOfNodes);
+        PriorityQueue<DijkstraElement<E>> pq = new PriorityQueue<>(new CompDijkstraPath());
+        pq.add(new DijkstraElement<>(from, 0, new LinkedList<>()));
+        while (!pq.isEmpty()) {
             DijkstraElement<E> temp = pq.poll();
-            int node = temp.getNode();
-            if(!knownNodes.contains(node)){
-                if(node == to){
+            if (!visitedNodes.contains(temp.getNode())) {
+                if (temp.getNode() == to) {
                     return temp.getPath().iterator();
-                }
-                knownNodes.add(node);
-                for(E e: edgeList.get(node)){
-                    if(!knownNodes.contains(e.getDest())){
-                        LinkedList<E> clone = (LinkedList<E>) temp.getPath().clone();
-                        clone.add(e);
-                        DijkstraElement<E> newEle = new DijkstraElement<>(e.getDest(), temp.getWeight()+e.getWeight(), clone);
-                        pq.add(newEle);
-                        /*temp.getPath().add(e);
-                        temp.weight += e.getWeight();
-                        pq.add(temp);*/
+                } else {
+                    visitedNodes.add(temp.getNode());
+                    for (E edge : edges[temp.getNode()]) {
+                        if (!visitedNodes.contains(edge.getDest())) {
+                            LinkedList<E> clone = (LinkedList<E>) temp.getPath().clone();
+                            clone.add(edge);
+                            pq.add(new DijkstraElement<>(edge.getDest(), temp.getWeight() + edge.getWeight(), clone));
+                        }
                     }
                 }
             }
         }
         return null;
     }
-
+    
     public Iterator<E> minimumSpanningTree() {
-        ArrayList<ArrayList<E>> cc = new ArrayList<>(noOfNodes);
-        int ccSize = 0;
-        for(int i = 0; i<noOfNodes; i++){
-            cc.add(new ArrayList<>());
-        }
-        PriorityQueue<Edge> pq = new PriorityQueue<>(new CompKruskalEdge<>());
-        for (ArrayList<E> edges: edgeList) {
-            pq.addAll(edges);
-        }
-        System.out.println("Size = " + edgeList.size());
-        while(!pq.isEmpty() && ccSize < noOfNodes){
-            Edge e = pq.poll();
-            int origin = e.getSource();
-            int destination = e.getDest();
-            if(!(cc.get(origin) == cc.get(destination))){
-                ArrayList<E> smallList;
-                ArrayList<E> bigList;
-                int small;
-                if(cc.get(origin).size() > cc.get(destination).size()){
-                    bigList = cc.get(origin);
-                    smallList = cc.get(destination);
-                    small = destination;
-                }
-                else{
-                    bigList = cc.get(destination);
-                    smallList = cc.get(origin);
-                    small = origin;
-                }
-                for(E edge: smallList){
-                    bigList.add(edge);
-                    cc.set(edge.getSource(), bigList);
-                    cc.set(edge.getDest(), bigList);
-                }
 
-                cc.set(small, bigList);
+        ArrayList<E>[] cc = new ArrayList[nrOfNodes];
+        int ccSize = 0;
+        PriorityQueue<E> pq = new PriorityQueue<>(new CompKruskalEdge<>());
+        for(int i = 0; i < nrOfNodes; i++) {
+            cc[i] = new ArrayList<>();
+            pq.addAll(edges[i]);
+        }
+        while(!pq.isEmpty() && ccSize < nrOfNodes) {
+            E temp = pq.poll();
+            if(!(cc[temp.getDest()] == cc[temp.getSource()])) {
+                ArrayList<E> bigList, smallList;
+                int small;
+                if(cc[temp.getSource()].size() <= cc[temp.getDest()].size()) {
+                    bigList = cc[temp.getDest()];
+                    smallList = cc[temp.getSource()];
+                    small = temp.getSource();
+                }
+                else {
+                    bigList = cc[temp.getSource()];
+                    smallList = cc[temp.getDest()];
+                    small = temp.getDest();
+                }
+                for(E edge: smallList) {
+                    bigList.add(edge);
+                    cc[edge.getSource()] = bigList;
+                    cc[edge.getDest()] = bigList;
+                }
+                cc[small] = bigList;
                 ccSize++;
 
-                bigList.add((E)e);
             }
         }
-        return cc.get(0).iterator();
+
+        return cc[0].iterator();
     }
-
-    private DijkstraElement<E> updateElement(DijkstraElement<E> ele){
-
-    }
-
-
 }
-
-
-

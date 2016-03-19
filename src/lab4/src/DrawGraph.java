@@ -1,4 +1,3 @@
-package lab4.src;
 
 
 import java.awt.BasicStroke;

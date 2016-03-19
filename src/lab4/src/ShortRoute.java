@@ -1,4 +1,4 @@
-package lab4.src;
+
 
 
 import java.awt.*;
@@ -410,7 +410,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 	} // end readAndDrawBIGGraph
 
 	public static void main(String[] args) {
-		//System.out.println(new File("scores.dat").getAbsolutePath());
+		System.out.println(new File("scores.dat").getAbsolutePath());
 		new ShortRoute(null);
 	}
 }  // end ShortRoute
