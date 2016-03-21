@@ -55,7 +55,7 @@ public class DirectedGraph<E extends Edge> {
         }
         while(!pq.isEmpty() && ccSize < nrOfNodes) {
             E temp = pq.poll();
-            if(!(cc[temp.getDest()] == cc[temp.getSource()])) {
+            if(cc[temp.getDest()] != cc[temp.getSource()]) {
                 ArrayList<E> bigList, smallList;
                 int small;
                 if(cc[temp.getSource()].size() <= cc[temp.getDest()].size()) {
@@ -73,12 +73,13 @@ public class DirectedGraph<E extends Edge> {
                     cc[edge.getSource()] = bigList;
                     cc[edge.getDest()] = bigList;
                 }
+
+                bigList.add(temp);
                 cc[small] = bigList;
                 ccSize++;
-
             }
         }
-
+        
         return cc[0].iterator();
     }
 }
